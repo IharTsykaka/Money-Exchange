@@ -1,35 +1,37 @@
 module.exports = function makeExchange(currency) {
-    obj = {};
-    if (currency < 1) {
-        return obj;
-    }
-    if (currency > 10000) {
-        obj = {error: "You are rich, my friend! We don't have so much coins for exchange"};
-        return obj;
-    }
-    else {
-        while (currency != 0) {
-            if (currency >= 50) {
-                obj["H"] = Math.floor(currency / 50);
-                currency -= obj["H"] * 50;
-            }
-            if (currency >= 25) {
-                obj["Q"] = Math.floor(currency / 25);
-                currency -= obj["Q"] * 25;
-            }
-            if (currency >= 10) {
-                obj["D"] = Math.floor(currency / 10);
-                currency -= obj["D"] * 10;
-            }
-            if (currency >= 5) {
-                obj["N"] = Math.floor(currency / 5);
-                currency -= obj["N"] * 5;
-            }
-            if (currency >= 1) {
-                obj["P"] = currency;
-                currency = 0;
-            }
-            return obj;
-        }
-    }
+   let objCurrensy = {}
+   
+   let curH = 50;
+   let curQ = 25;
+   let curD = 10;
+   let curN = 5;
+   let curP = 1;
+   
+   if(currency <= 0) return {};
+   if(currency > 10000) return {error: "You are rich, my friend! We don't have so much coins for exchange"};
+
+   let resH = Math.floor(currency/curH);
+   if (resH > 0) {
+    objCurrensy.H = resH;
+    currency -= (curH*resH) 
+   }
+   let resQ = Math.floor(currency/curQ);
+   if (resQ > 0) {
+    objCurrensy.Q= resQ;
+    currency -= (curQ*resQ) 
+   }
+   let resD = Math.floor(currency/curD);
+   if (resD > 0) {
+    objCurrensy.D = resD;
+    currency -= (curD*resD) 
+   }
+   let resN = Math.floor(currency/curN);
+   if (resN > 0) {
+    objCurrensy.N = resN;
+    currency -= (curN*resN) 
+   }
+   let resP = Math.floor(currency/curP);
+   if (resP > 0) objCurrensy.P = resP;     
+   
+   return objCurrensy;
 }
